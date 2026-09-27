@@ -27,10 +27,9 @@ public:
         ListNode *t3 = t2->next;
         t2->next = NULL;
 
-        
-        ListNode *midList = reverse(t1->next);
-        t1->next->next = t3;
-        t1->next = midList;
+        ListNode *subList = t1->next;
+        t1->next = reverse(t1->next);
+        subList->next = t3;
 
         return dummy->next;
         
