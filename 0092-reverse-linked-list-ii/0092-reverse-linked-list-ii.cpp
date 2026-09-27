@@ -12,26 +12,27 @@ public:
     }
     ListNode* reverseBetween(ListNode* head, int left, int right) {
         if(left == right) return head;
-        ListNode *dummy = new ListNode(108);
-        dummy->next = head;
-        ListNode *t1 = dummy;
-        for(int i=1;i<left;i++){
-            t1 = t1->next;
+        ListNode *a, *b, *c, *d, *temp = head;
+        a = b = c = d = NULL;
+        int n = 1;
+        while(temp){
+            if(n==left-1) a = temp;
+            if(n==left) b = temp;
+            if(n==right) c = temp;
+            if(n==right+1) d = temp;
+            temp = temp->next;
+            n++;
         }
 
-        ListNode *t2 = t1->next;
-        for(int i=left;i<right;i++){
-            t2 = t2->next;
-        }
+        if(a) a->next = NULL;
+        c->next = NULL;
 
-        ListNode *t3 = t2->next;
-        t2->next = NULL;
+        c = reverse(b);
+        if(a) a->next = c;
+        b->next = d;
 
-        ListNode *subList = t1->next;
-        t1->next = reverse(t1->next);
-        subList->next = t3;
-
-        return dummy->next;
+        if(a) return head;
+        return c;
         
     }
 };
