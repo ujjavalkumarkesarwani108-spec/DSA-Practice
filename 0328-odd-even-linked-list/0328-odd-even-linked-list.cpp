@@ -1,20 +1,26 @@
 class Solution {
 public:
     ListNode* oddEvenList(ListNode* head) {
-        if(!head || !head->next) return head;
-        ListNode *dummy = new ListNode(108);
-        ListNode *ptr1 = head, *ptr2 = dummy;
-        while(ptr1 && ptr1->next){
-            ptr2->next = ptr1->next;
-            ptr1->next = ptr1->next->next;
-            ptr2 = ptr2->next;
-            if(ptr1->next) ptr1 = ptr1->next;
+        ListNode *dummy1 = new ListNode(108);        
+        ListNode *dummy2 = new ListNode(108);        
+        ListNode *t1 = dummy1, *t2 = dummy2, *temp = head;
+        int x = 1;
+        while(temp){
+            if(x%2){
+                t1->next = temp;
+                t1 = t1->next;
+            }
+            else{
+                t2->next = temp;
+                t2 = t2->next;
+            }
+            x++;
+            temp = temp->next;
         }
-        ptr2->next = NULL;
-        ptr1->next = dummy->next;
+        t1->next = dummy2->next;
+        t2->next = nullptr;
 
-        return head;
-
+        return dummy1->next;
     }
 };
 
