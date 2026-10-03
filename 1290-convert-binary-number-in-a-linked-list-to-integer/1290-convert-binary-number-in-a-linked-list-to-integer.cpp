@@ -6,7 +6,15 @@ public:
             num += to_string(head->val);
             head = head->next;
         }
-        reverse(num.begin(),num.end());
+        // string reverse
+        // reverse(num.begin(),num.end());
+        //              or
+        for(int i=0,j=num.length()-1;i<j;i++,j--){
+            char temp = num[i];
+            num[i] = num[j];
+            num[j] = temp;
+        }
+
         int ans = 0;
         int mf = 1;        // multiplying factor
         for(char ch : num){
