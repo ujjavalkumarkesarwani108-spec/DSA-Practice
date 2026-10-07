@@ -1,7 +1,6 @@
 class Solution {
 public:
     vector<int> nodesBetweenCriticalPoints(ListNode* head) {
-        // if(!head->next->next || !head->next->next->next) return {-1,-1};
         ListNode *prev = head;
         ListNode *curr = head->next;
         ListNode *Next = head->next->next;
