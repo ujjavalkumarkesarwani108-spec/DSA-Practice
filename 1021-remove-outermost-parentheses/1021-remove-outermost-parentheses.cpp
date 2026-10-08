@@ -1,18 +1,20 @@
 class Solution {
 public:
     string removeOuterParentheses(string s) {
-        stack<char> st;
+        int opened = 0;
         string ans = "";
         for(char ch : s){
-            // excluding open outer parenthesis
-            if(!st.empty()) ans += ch;
-
-            if(ch == '(') st.push(ch);
-            else st.pop();
-
-            // excluding close outer parenthesis
-            if(st.empty()){
-                ans.pop_back();
+            if(ch == '('){
+                if(opened != 0){
+                    ans += ch;
+                }
+                opened++;
+            }
+            else{
+                opened--;
+                if(opened != 0){
+                    ans += ch;
+                }
             }
         }
         return ans;
