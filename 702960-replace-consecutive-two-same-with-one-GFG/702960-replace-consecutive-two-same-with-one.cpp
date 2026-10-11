@@ -9,8 +9,7 @@ class Solution {
                 ans += ch;
             }
             else{
-                if(st.top()==ch) continue;
-                else{
+                if(st.top()!=ch){
                     st.push(ch);
                     ans += ch;
                 }
