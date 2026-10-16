@@ -4,19 +4,17 @@ class Solution {
         int n = arr.size();
         vector<int> ans(n);
         stack<int> st;
-        st.push(0);
-        ans[0] = 1;
-        for(int i=1;i<n;i++){
-            // 1 - pop
+        for(int i=0;i<n;i++){
+            //pop
             while(!st.empty() && arr[st.top()] <= arr[i]){
                 st.pop();
             }
             
-            // 2 - ans
-            if(st.empty()) ans[i] = i + 1;  // i - (-1)
-            else ans[i] = i - st.top();
+            //ans
+            if(!st.empty()) ans[i] = i - st.top();
+            else ans[i] = i + 1;
             
-            // 3 - push
+            //push
             st.push(i);
         }
         return ans;
