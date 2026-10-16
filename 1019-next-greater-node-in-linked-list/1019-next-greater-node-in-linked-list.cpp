@@ -1,6 +1,5 @@
 class Solution {
 public:
-    int len = 0;
     ListNode *reverse(ListNode *head){
         ListNode *prev = NULL, *curr = head, *nex;
         while(curr){
@@ -8,7 +7,6 @@ public:
             curr->next = prev;
             prev = curr;
             curr = nex;
-            len++;          // to  calculate length of LL
         }
         return prev;
     }
