@@ -7,9 +7,7 @@ public:
         int ans = 0;
 
         // calculating prev. smaller ele idx
-        st.push(0);
-        pse[0] = -1;
-        for(int i=1;i<n;i++){
+        for(int i=0;i<n;i++){
             //pop
             while(!st.empty() && heights[st.top()] >= heights[i]){
                 st.pop();
@@ -25,9 +23,7 @@ public:
         }
 
         // calculating next smaller ele idx
-        st.push(n-1);
-        nse[n-1] = n;
-        for(int i=n-2;i>=0;i--){
+        for(int i=n-1;i>=0;i--){
             while(!st.empty() && heights[st.top()] >= heights[i]){
                 st.pop();
             }
