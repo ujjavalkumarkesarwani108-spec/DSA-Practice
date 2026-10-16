@@ -1,30 +1,35 @@
 class Solution {
 public:
-    void solve(ListNode *head,vector<int>& ans,stack<int>& st){
-        if(!head->next){
-            st.push(head->val);
-            ans.push_back(0);
-            return;
+    int len = 0;
+    ListNode *reverse(ListNode *head){
+        ListNode *prev = NULL, *curr = head, *nex;
+        while(curr){
+            nex = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = nex;
+            len++;          // to  calculate length of LL
         }
-        solve(head->next,ans,st);
-        //pop
-        while(!st.empty() && st.top() <= head->val){
-            st.pop();
-        }
-
-        //ans
-        ans.push_back(st.empty() ? 0 : st.top());
-
-        //push
-        st.push(head->val);
+        return prev;
     }
     vector<int> nextLargerNodes(ListNode* head) {
-        vector<int> ans;
+        head = reverse(head);
         stack<int> st;
-        solve(head,ans,st);
-        
-        reverse(ans.begin(),ans.end());
-        return ans;        
+        vector<int> ans;
+        while(head){
+            // pop
+            while(!st.empty() && st.top() <= head->val) st.pop();
+            // ans
+            ans.push_back(st.empty() ? 0 : st.top());
+            // push
+            st.push(head->val);
+            head = head->next;
+        }
+        // reverse vector
+        for(int i=0,j=ans.size()-1;i<j;i++,j--){
+            swap(ans[i],ans[j]);
+        }
+        return ans;
     }
 };
 
