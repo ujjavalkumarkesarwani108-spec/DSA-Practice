@@ -9,7 +9,7 @@ public:
     MyCircularQueue(int k) : capacity(k), fidx(0), ridx(-1), arr(new int[capacity]), size(0) {}
     
     bool enQueue(int val) {
-        if(isFull()) return false;
+        if(size == capacity) return false;
         ridx = (ridx + 1) % capacity;
         arr[ridx] = val;
         size++;
@@ -17,19 +17,19 @@ public:
     }
     
     bool deQueue() {
-        if(isEmpty()) return false;
+        if(size == 0) return false;
         fidx = (fidx + 1) % capacity;
         size--;
         return true;
     }
     
     int Front() {
-        if(isEmpty()) return -1;
+        if(size == 0) return -1;
         return arr[fidx];
     }
     
     int Rear() {
-        if(isEmpty()) return -1;
+        if(size == 0) return -1;
         return arr[ridx];
     }
     
