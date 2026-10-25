@@ -6,12 +6,12 @@ public:
     int *arr;
     int size;
 
-    MyCircularQueue(int k) : capacity(k), fidx(0), ridx(0), arr(new int[capacity]), size(0) {}
+    MyCircularQueue(int k) : capacity(k), fidx(0), ridx(-1), arr(new int[capacity]), size(0) {}
     
     bool enQueue(int val) {
         if(isFull()) return false;
-        arr[ridx] = val;
         ridx = (ridx + 1) % capacity;
+        arr[ridx] = val;
         size++;
         return true;
     }
@@ -30,8 +30,7 @@ public:
     
     int Rear() {
         if(isEmpty()) return -1;
-        if(ridx == 0) return arr[capacity - 1]; 
-        return arr[ridx-1];
+        return arr[ridx];
     }
     
     bool isEmpty() {
