@@ -10,16 +10,15 @@ public:
     
     bool enQueue(int val) {
         if(isFull()) return false;
-        arr[ridx++] = val;
+        arr[ridx] = val;
+        ridx = (ridx + 1) % capacity;
         size++;
-        if(ridx == capacity) ridx = 0;
         return true;
     }
     
     bool deQueue() {
         if(isEmpty()) return false;
-        fidx++;
-        if(fidx == capacity) fidx = 0;
+        fidx = (fidx + 1) % capacity;
         size--;
         return true;
     }
