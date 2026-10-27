@@ -1,7 +1,6 @@
 class Solution {
 public:
     string removeStars(string s) {
-        int n = s.size();
         stack<char> st;
 
         for(char ch : s){
