@@ -1,33 +1,43 @@
 class Solution {
 public:
-    string predictPartyVictory(string senate) {
-        int n = senate.size();
-        deque<char> dq;
-        int Rcount = 0, Dcount = 0;
-        for(char ch : senate){
-            dq.push_back(ch);
-            if(ch == 'R') Rcount++;
-            else Dcount++;
+    string predictPartyVictory(string s) {
+        queue<int> q;
+        queue<int> r;
+        queue<int> d;
+        
+        for(int i=0;i<s.size();i++){
+            q.push(i);
+            if(s[i] == 'R') r.push(i);
+            else d.push(i);
         }
 
-        while(Dcount && Rcount){
-            char enemy = (dq.front() == 'R') ? 'D' : 'R';
-            int c = 0;
-            while(dq.front() != enemy){
-                dq.push_back(dq.front());
-                dq.pop_front();
-                c++;
-            }
-            dq.pop_front();
-            enemy == 'R' ? Rcount-- : Dcount--;
-            while(--c){
-                dq.push_front(dq.back());
-                dq.pop_back();
-            }
-        }
+        while(true){
+            if(s[q.front()] == 'R'){
+                if(!d.empty()){
+                    s[d.front()] = 'X';
+                    d.pop();
 
-        if(Dcount) return "Dire";
-        else return "Radiant";
+                    q.push(q.front());
+                    q.pop();
+                    r.push(r.front());
+                    r.pop();
+                }
+                else return "Radiant";
+            }
+            else if(s[q.front()] == 'D'){
+                if(!r.empty()){
+                    s[r.front()] = 'X';
+                    r.pop();
+
+                    q.push(q.front());
+                    q.pop();
+                    d.push(d.front());
+                    d.pop();
+                }
+                else return "Dire";
+            }
+            else q.pop();
+        }
     }
 };
 
