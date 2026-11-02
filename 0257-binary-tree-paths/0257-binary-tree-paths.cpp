@@ -10,14 +10,11 @@ public:
             ans.push_back(path);
             return;
         }
-
         helper(root->left,path,ans);
         helper(root->right,path,ans);
-
     }
     vector<string> binaryTreePaths(TreeNode* root) {
         vector<string> ans;
-        // string path = "";
         helper(root,"",ans);
         return ans;
     }
