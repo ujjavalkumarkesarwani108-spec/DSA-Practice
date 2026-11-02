@@ -1,6 +1,6 @@
 class Solution {
 public:
-    void helper(TreeNode *p, TreeNode *q, bool &same){
+    void helper(TreeNode *&p, TreeNode *&q, bool &same){
         if(!p && !q){
             same = true;
             return;
@@ -11,13 +11,13 @@ public:
             return;
         }
 
-        if(same) helper(p->left,q->left,same);
-        if(same) helper(p->right,q->right,same);
+        if(same) helper(p->left, q->left, same);
+        if(same) helper(p->right, q->right, same);
     }
     bool isSameTree(TreeNode* p, TreeNode* q) {
         bool same = true;
         helper(p,q,same);
-        return same;
+        return same;        
     }
 };
 
