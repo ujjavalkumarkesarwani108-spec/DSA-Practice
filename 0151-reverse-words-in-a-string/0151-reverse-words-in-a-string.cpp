@@ -1,15 +1,24 @@
 class Solution {
 public:
     string reverseWords(string s) {
-        stringstream ss(s);
-        string temp;
-        string ans = "";
+        int n = s.length();
+        reverse(s.begin(),s.end());
+        string ans;
 
-        while(ss>>temp){
-            ans = temp + " " + ans;
+        for(int i=0;i<n;i++){
+            string word = "";
+            while(i<n && s[i] != ' '){
+                word += s[i];
+                i++;
+            }
+
+            if(!word.empty()){
+                reverse(word.begin(),word.end());
+                ans += word + " ";
+            }
         }
-        ans.pop_back();
-        
+        ans.pop_back();     // removing last whitespace
+
         return ans;
     }
 };
