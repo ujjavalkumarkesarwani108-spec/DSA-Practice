@@ -5,38 +5,20 @@ public:
         return 1 + max(levels(root->left),levels(root->right));
     }
 
-    void traverseNthLevel(TreeNode *root,int n,vector<int>& v){
+    void levelOrderTraversal(TreeNode *root,vector<vector<int>>& ans,int i){
         if(!root) return;
-        if(!n){
-            v.push_back(root->val);
-            return;
-        }
-        traverseNthLevel(root->left,n-1,v);
-        traverseNthLevel(root->right,n-1,v);
-    }
-    
-    void traverseNthLevelRev(TreeNode *root,int n,vector<int>& v){
-        if(!root) return;
-        if(!n){
-            v.push_back(root->val);
-            return;
-        }
-        traverseNthLevelRev(root->right,n-1,v);
-        traverseNthLevelRev(root->left,n-1,v);
-    }
+        
+        if(i%2==0) ans[i].push_back(root->val);
+        else ans[i].insert(ans[i].begin(),root->val);
 
-    void levelOrderTraversal(TreeNode *root,vector<vector<int>>& ans){
-        int n = levels(root);
-        for(int i=0;i<n;i++){
-            vector<int> v;
-            i%2==0 ? traverseNthLevel(root,i,v) : traverseNthLevelRev(root,i,v);
-            ans.push_back(v);
-        }
+        levelOrderTraversal(root->left,ans,i+1);
+        levelOrderTraversal(root->right,ans,i+1);
     }
 
     vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
-        vector<vector<int>> ans;
-        levelOrderTraversal(root,ans);
+        int n = levels(root);
+        vector<vector<int>> ans(n);
+        levelOrderTraversal(root,ans,0);
         return ans;
     }
 };
