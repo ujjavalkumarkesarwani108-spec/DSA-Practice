@@ -1,8 +1,18 @@
 class Solution {
 public:
-    int levels(TreeNode *root){
-        if(!root) return 0;
-        return 1 + max(levels(root->left),levels(root->right));
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        vector<vector<int>> ans;
+        levelOrderTraversal(root,ans);
+        return ans;
+    }
+
+    void levelOrderTraversal(TreeNode *root,vector<vector<int>>& ans){
+        int n = levels(root);
+        for(int i=0;i<n;i++){
+            vector<int> v;
+            traverseNthLevel(root,i,v);
+            ans.push_back(v);
+        }
     }
 
     void traverseNthLevel(TreeNode *root,int n,vector<int>& v){
@@ -15,19 +25,9 @@ public:
         traverseNthLevel(root->right,n-1,v);
     }
 
-    void levelOrderTraversal(TreeNode *root,vector<vector<int>>& ans){
-        int n = levels(root);
-        for(int i=0;i<n;i++){
-            vector<int> v;
-            traverseNthLevel(root,i,v);
-            ans.push_back(v);
-        }
-    }
-    
-    vector<vector<int>> levelOrder(TreeNode* root) {
-        vector<vector<int>> ans;
-        levelOrderTraversal(root,ans);
-        return ans;
+    int levels(TreeNode *root){
+        if(!root) return 0;
+        return 1 + max(levels(root->left),levels(root->right));
     }
 };
 
