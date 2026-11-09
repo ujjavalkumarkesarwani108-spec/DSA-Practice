@@ -7,7 +7,8 @@ public:
         int maxWater = 0;
 
         while(i<j){
-            maxWater = max(maxWater,min(height[i],height[j]) * (j-i));
+            int water = min(height[i],height[j]) * (j-i);
+            maxWater = max(maxWater,water);
             height[i] <= height[j] ? i++ : j--;
         }
 
