@@ -1,39 +1,19 @@
-/* Structure of Binary Tree Node
-class Node {
-public:
-    int data;
-    Node* left;
-    Node* right;
-
-    Node(int val) {
-        data = val;
-        left = right = nullptr;
-    }
-};*/
 
 class Solution {
   public:
+    int levels(Node *root){
+        if(!root) return 0;
+        return 1 + max(levels(root->left),levels(root->right));
+    }
+    void preorder(Node *root,vector<int>& ans,int level){
+        if(!root) return;
+        ans[level] = root->data;
+        preorder(root->right,ans,level+1);
+        preorder(root->left,ans,level+1);
+    }
     vector<int> leftView(Node *root) {
-        if(!root) return {};
-        
-        vector<int> ans;
-        queue<Node*> q;
-        q.push(root);
-        
-        while(!q.empty()){
-            int levelSize = q.size();
-            
-            for(int i=0;i<levelSize;i++){
-                Node *temp = q.front();
-                q.pop();
-                
-                if(i==0) ans.push_back(temp->data);
-                
-                if(temp->left) q.push(temp->left);
-                if(temp->right) q.push(temp->right);
-            }
-        }
-        
+        vector<int> ans(levels(root));
+        preorder(root,ans,0);
         return ans;
     }
 };
