@@ -21,9 +21,6 @@ public:
         if(k>=n){
             return 0;
         }
-        else if(k == n-1){
-            return prefix[n-1];
-        }
         else{
             return prefix[n-1] / prefix[n-k-1];
         }
