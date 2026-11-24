@@ -4,7 +4,7 @@ public:
         if(prelo > prehi) return nullptr;   // or if(inlo > inhi)
 
         TreeNode *root = new TreeNode(pre[prelo]);
-        if(prelo == prehi) return root;
+        if(prelo == prehi) return root;             // or if(inlo == inhi)
 
         int i = inlo;
         while(i<inhi){
