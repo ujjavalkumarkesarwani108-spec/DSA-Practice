@@ -1,24 +1,23 @@
 class Solution {
 public:
-    void helper(TreeNode *root,int val,TreeNode *newNode){
+    void helper(TreeNode *root,int val){
         if(!root) return;
 
         if(!root->left && root->val > val){
-            root->left = newNode;
+            root->left = new TreeNode(val);
             return;
         }
         else if(!root->right && root->val < val){
-            root->right = newNode;
+            root->right = new TreeNode(val);
             return;
         }
 
-        if(root->val > val) helper(root->left,val,newNode);
-        else helper(root->right,val,newNode);
+        if(root->val > val) helper(root->left,val);
+        else helper(root->right,val);
     }
     TreeNode* insertIntoBST(TreeNode* root, int val) {
-        TreeNode *newNode = new TreeNode(val);
-        if(!root) return newNode;
-        helper(root,val,newNode);
+        if(!root) return new TreeNode(val);
+        helper(root,val);
         return root;
     }
 };
