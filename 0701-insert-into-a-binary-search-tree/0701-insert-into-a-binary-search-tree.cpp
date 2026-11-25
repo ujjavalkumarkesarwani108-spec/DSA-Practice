@@ -3,18 +3,22 @@ public:
     void helper(TreeNode *root,int val){
         if(!root) return;
 
-        if(!root->left && root->val > val){
-            root->left = new TreeNode(val);
-            return;
+        if(val < root->val){
+            if(!root->left){
+                root->left = new TreeNode(val);
+                return;
+            }
+            helper(root->left,val);  // here else keyword is optional bcz of return in if()
         }
-        else if(!root->right && root->val < val){
-            root->right = new TreeNode(val);
-            return;
+        else{   // val > root->val not >= bcz unique elements guaranteed in constraints
+            if(!root->right){
+                root->right = new TreeNode(val);
+                return;
+            }
+            helper(root->right,val);
         }
-
-        if(root->val > val) helper(root->left,val);
-        else helper(root->right,val);
     }
+
     TreeNode* insertIntoBST(TreeNode* root, int val) {
         if(!root) return new TreeNode(val);
         helper(root,val);
