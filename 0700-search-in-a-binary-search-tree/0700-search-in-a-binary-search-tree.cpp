@@ -3,12 +3,9 @@ public:
     TreeNode* searchBST(TreeNode* root, int val) {
         if(!root) return nullptr;
 
-        TreeNode *ans;
-        if(root->val == val) ans = root;
-        else if(root->val > val) ans = searchBST(root->left,val);
-        else ans = searchBST(root->right,val);
-
-        return ans;
+        if(root->val == val) return root;
+        else if(root->val > val) return searchBST(root->left, val);
+        else return searchBST(root->right, val);  
     }
 };
 
